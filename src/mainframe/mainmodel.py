@@ -18,13 +18,11 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
-from pubsub import pub
 import win32api
 import win32con
 import win32gui
-import wx
 
-from mvcbase import ModelRole, PubSend
+import utils.mvc as mvc
 
 class HWndInfo(object):
     def __init__(self, hwnd):
@@ -34,71 +32,36 @@ class HWndInfo(object):
         self.iconized = win32gui.IsIconic(hwnd)
         self.visible = win32gui.IsWindowVisible(hwnd)
 
-class ModelSetting(object):
-    def __init__(self, defvalue):
-        self.defvalue = defvalue
-        self.icache = dict()
+@mvc.DynamicModel
+class MainModel(object):
 
-    def __get__(self, instance, owner=None):
-        return self.icache.setdefault(instance, self.defvalue)
-
-    def __set__(self, instance, value):
-        self.icache[instance] = value
-        instance.reload()
-
-@ModelRole
-class Model(object):
-
-    checks = ['titled', 'enabled', 'iconized', 'visible']
-    titled = ModelSetting(defvalue=wx.CHK_CHECKED)
-    enabled = ModelSetting(defvalue=wx.CHK_CHECKED)
-    visible = ModelSetting(defvalue=wx.CHK_CHECKED)
-    iconized = ModelSetting(defvalue=wx.CHK_CHECKED)
-    foreground = ModelSetting(defvalue=wx.CHK_UNCHECKED)
-    selfforeground = ModelSetting(defvalue=wx.CHK_CHECKED)
-
-    def __init__(self):
-        pass
-
-    @PubSend('hwndinfos')
+    def __init__(self, hwnd, reload=False):
+        self.hwnd = hwnd
+        if reload:
+            self.reload()
+    
+    @mvc.PubSend('mainmodel.hwndinfos')
     def reload(self):
         hwnds = list()
         def EnumWindowsCallBack(hwnd, extra):
             hwndinfo = HWndInfo(hwnd)
-
             hwnds.append(HWndInfo(hwnd)) # add for a set
-
-            # If any check fails, it will be removed
-            for check in self.checks:
-                config = getattr(self, check)
-                wininfo = getattr(hwnds[-1], check)
-
-                if config == wx.CHK_UNDETERMINED:
-                    continue
-
-                if config == wx.CHK_CHECKED and not wininfo:
-                    hwnds.pop(-1)
-                    break
-
-                if config == wx.CHK_UNCHECKED and wininfo:
-                    hwnds.pop(-1)
-                    break
-
             return True
 
         win32gui.EnumWindows(EnumWindowsCallBack, None)
-        # pub.sendMessage('model.hwndinfos', msg=hwnds)
         return hwnds
 
+    def SetForeground(self, hwnds):
+        for hwnd in hwnds:
+            # win32gui.SetForegroundWindow(hwnd)
+            win32gui.SetActiveWindow(hwnd)
+    
+    @mvc.PubSend('mainmodel.hwndshown')
     def Show(self, hwnds, action):
         for hwnd in hwnds:
             win32gui.ShowWindow(hwnd, action)
-            if self.foreground:
-                win32gui.SetForegroundWindow(hwnd)
-
-        if self.selfforeground:
-            win32gui.SetForegroundWindow(self.hwnd)
         self.reload()
+        return hwnds
 
     def ShowNormal(self, hwnds):
         self.Show(hwnds, win32con.SW_NORMAL)
@@ -114,6 +77,3 @@ class Model(object):
 
     def ShowHide(self, hwnds):
         self.Show(hwnds, win32con.SW_HIDE)
-
-    def SetForeground(self, hwnd):
-        win32gui.SetForegroundWindow(hwnd)

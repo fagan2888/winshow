@@ -5,19 +5,33 @@
 ; the directory the tool is calling it from
 ; hence the ..\build\xxxx to fall down to the base directory
 
+; Default values
+; #define MyAppName "appname"
+; #define MyAppVersion "version"
+; #define MyAppPublisher "author"
+; #define MyAppYear "year"
+; #define MyAppURL "url"
+; #define MyAppExeName "appexe"
+; #define MyBuildDir "..\build\inno"
+; #define MyDistDir "..\dist\inno"
+; #define MyAppId "myappid"
+
 #define MyAppName "winshow"
-#define MyAppVersion "0.0.1"
+#define MyAppVersion "0.2.0"
 #define MyAppPublisher "Daniel Rodriguez"
 #define MyAppYear "2014"
-#define MyAppURL "https://github.com/mementum/winshow"
-#define MyAppExeName "winshow.exe"
+#define MyAppURL "http://github.com/mementum/winshow"
+#define MyAppExeName "winshow"
+#define MyBuildDir "..\binaries\setup\build\winshow"
+#define MyDistDir "..\binaries\setup\dist"
+#define MyAppId "CD779649-20A3-4D7A-BF06-60702EB70521"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 ; The fist { is needed as an escape character
-AppID={{CD779649-20A3-4D7A-BF06-60702EB70521}
+AppId={#MyAppName}-{#MyAppId}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -27,17 +41,17 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-LicenseFile=..\build\innosetup\LICENSE
-;InfoBeforeFile=..\build\innosetup\README.md
+LicenseFile={#MyBuildDir}\LICENSE
+;InfoBeforeFile={#MyBuildDir}\README.md
 OutputBaseFilename={#MyAppName}-{#MyAppVersion}-setup
 Compression=lzma2/Ultra64
 SolidCompression=false
-OutputDir=..\dist\innosetup
+OutputDir={#MyDistDir}
 AppVerName={#MyAppVersion}
 InternalCompressLevel=Ultra64
 ShowLanguageDialog=no
 AppCopyright=Copyright (C) {#MyAppYear} {#MyAppPublisher}
-; SetupIconFile=..\build\innosetup\icons\{#MyAppName}.ico
+; SetupIconFile={#MyBuildDir}\icons\{#MyAppName}.ico
 ; For updates
 UsePreviousAppDir=yes
 CreateUninstallRegKey=no
@@ -51,7 +65,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: ..\build\innosetup\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs uninsremovereadonly; 
+Source: {#MyBuildDir}\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs uninsremovereadonly; 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

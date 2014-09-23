@@ -1,21 +1,21 @@
 #!/usr/bin/env python
-# -*- coding: latin-1; py-indent-offset:4 -*-
+# -*- coding: utf-8; py-indent-offset:4 -*-
 ################################################################################
 # 
-#   Copyright (C) 2014 Daniel Rodriguez
+#  Copyright (C) 2014 Daniel Rodriguez
 #
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
 #
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-#   You should have received a copy of the GNU General Public License
-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ################################################################################
 #
@@ -50,7 +50,7 @@ class ColumnSorterMixinNextGen(object):
     '''
 
     def __init__(self):
-        self.col = -1 # Keeps a reference to the last sorte column
+        self.col = -1 # Keeps a reference to the last sorted column
         self.sortflags = list() # Keeps ascending/descending reference for columns
         self.sortdata = dict() # Holder for column text for he sort process
 
@@ -71,18 +71,41 @@ class ColumnSorterMixinNextGen(object):
 
     def OnColClick(self, event):
         '''
-        When the event happens a list of column text is gathered on the fly to use it
+        Gather column from event and pass it on
+        '''
+        event.Skip()
+        self.DoSort(event.GetColumn())  # current column to be sorted
+
+    def DoSort(self, column, status=None):
+        '''
+        Separated from event management to allow it to be used internally and externally
+
+        When called a list of column text is gathered on the fly to use it
         during the sorting process.
 
         This is key to avoid the user keeping external data sync'ed: the data is already in the
         control
 
+        Does additional column count control and allows reordering with current state
+
         The rest from the original
         '''
-        event.Skip()
-        oldcol = self.col # refernce to last sorted column
-        self.col = col = event.GetColumn() # current column to be sorted
-        self.sortflags[col] = not self.sortflags[col] # invert the last sorting order
+
+        colcount = self.GetColumnCount()
+        if not colcount:
+            return
+        if column < 0:
+            column = 0
+        elif column >= colcount:
+            column = colcount - 1
+
+        oldcol = self.col # reference to last sorted column
+        self.col = col = column
+
+        if status is None:
+            self.sortflags[col] = not self.sortflags[col] # invert the last sorting order
+        else:
+            self.sortflags[col] = status
 
         self.sortdata = dict() # prepare the data holder
         for index in xrange(0, self.GetItemCount()):
@@ -98,7 +121,6 @@ class ColumnSorterMixinNextGen(object):
             self.UpdateImages(oldcol)
             
         self.OnSortOrderChanged() # go to the notification callback
-
 
     def GetColumnSorter(self):
         """Returns a callable object to be used for comparing column values when sorting."""
@@ -144,8 +166,8 @@ class ColumnSorterMixinNextGen(object):
         '''
         index = self.InsertColumnOrig(col, heading, format, width)
         if index != -1:
-            # Colum inserte: Insert a sorting flag in the returned index
-            self.sortflags.insert(index, False)
+            # Colum insert: Insert a sorting flag in the returned index
+            self.sortflags.insert(index, True)
             if self.col >= index:
                 # Fix the index of the last sorted column because we added to the left
                 self.col += 1
@@ -209,12 +231,11 @@ class ColumnSorterMixinNextGen(object):
 
     def SortListItems(self, col=-1, ascending=True):
         """Sort the list on demand.  Can also be used to set the sort column and order."""
-        oldcol = self.col
-        if col != -1:
-            self.col = col
-            self.sortflags[col] = ascending
-        self.SortItems(self.GetColumnSorter())
-        self.UpdateImages(oldcol)
+        self.DoSort(col, ascending)
+
+    def SortListItemsLastState(self):
+        col, status = self.GetSortState()
+        self.DoSort(col, status)
 
 
 class SortListCtrl(wx.ListCtrl, ColumnSorterMixinNextGen):

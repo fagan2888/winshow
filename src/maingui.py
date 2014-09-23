@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*- 
 
 ###########################################################################
-## Python code generated with wxFormBuilder (version Oct  8 2012)
+## Python code generated with wxFormBuilder (version Jun  5 2014)
 ## http://www.wxformbuilder.org/
 ##
 ## PLEASE DO "NOT" EDIT THIS FILE!
 ###########################################################################
 
-from sortlistctrl import SortListCtrl
+from utils.widgets.sortlistctrl import SortListCtrl
 import wx
 import wx.xrc
 
 ###########################################################################
-## Class WinShow
+## Class MainFrame
 ###########################################################################
 
-class WinShow ( wx.Frame ):
+class MainFrame ( wx.Frame ):
 	
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"WinShow", pos = wx.DefaultPosition, size = wx.Size( -1,-1 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
@@ -51,20 +51,26 @@ class WinShow ( wx.Frame ):
 		
 		bSizer5 = wx.BoxSizer( wx.HORIZONTAL )
 		
-		self.m_button4 = wx.Button( self.m_panel1, wx.ID_ANY, u"Show", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer5.Add( self.m_button4, 0, wx.ALL, 5 )
+		self.m_buttonShow = wx.Button( self.m_panel1, wx.ID_ANY, u"Show", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonShow, 0, wx.ALL, 5 )
 		
-		self.m_button5 = wx.Button( self.m_panel1, wx.ID_ANY, u"Restore", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer5.Add( self.m_button5, 0, wx.ALL, 5 )
+		self.m_buttonRestore = wx.Button( self.m_panel1, wx.ID_ANY, u"Restore", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonRestore, 0, wx.ALL, 5 )
 		
-		self.m_button6 = wx.Button( self.m_panel1, wx.ID_ANY, u"Maximize", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer5.Add( self.m_button6, 0, wx.ALL, 5 )
+		self.m_buttonMaximize = wx.Button( self.m_panel1, wx.ID_ANY, u"Maximize", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonMaximize, 0, wx.ALL, 5 )
 		
-		self.m_button7 = wx.Button( self.m_panel1, wx.ID_ANY, u"Minimize", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer5.Add( self.m_button7, 0, wx.ALL, 5 )
+		self.m_buttonMinimize = wx.Button( self.m_panel1, wx.ID_ANY, u"Minimize", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonMinimize, 0, wx.ALL, 5 )
 		
-		self.m_button8 = wx.Button( self.m_panel1, wx.ID_ANY, u"Hide", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer5.Add( self.m_button8, 0, wx.ALL, 5 )
+		self.m_buttonHide = wx.Button( self.m_panel1, wx.ID_ANY, u"Hide", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonHide, 0, wx.ALL, 5 )
+		
+		self.m_staticline3 = wx.StaticLine( self.m_panel1, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_VERTICAL )
+		bSizer5.Add( self.m_staticline3, 0, wx.EXPAND|wx.TOP|wx.BOTTOM|wx.ALIGN_CENTER_VERTICAL, 5 )
+		
+		self.m_buttonAbout = wx.Button( self.m_panel1, wx.ID_ANY, u"About", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer5.Add( self.m_buttonAbout, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 		
 		
 		bSizer4.Add( bSizer5, 0, wx.ALIGN_CENTER_HORIZONTAL, 5 )
@@ -76,80 +82,89 @@ class WinShow ( wx.Frame ):
 		
 		sbSizer2 = wx.StaticBoxSizer( wx.StaticBox( self.m_panel1, wx.ID_ANY, u"Statistics" ), wx.VERTICAL )
 		
-		bSizer6 = wx.BoxSizer( wx.HORIZONTAL )
-		
-		self.m_staticText1 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Retrieved", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText1.Wrap( -1 )
-		self.m_staticText1.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 93, 92, False, wx.EmptyString ) )
-		
-		bSizer6.Add( self.m_staticText1, 0, wx.ALL, 5 )
-		
-		self.m_staticText2 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"--", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
-		self.m_staticText2.Wrap( -1 )
-		bSizer6.Add( self.m_staticText2, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
-		
-		
-		sbSizer2.Add( bSizer6, 0, wx.EXPAND, 5 )
-		
-		bSizer61 = wx.BoxSizer( wx.HORIZONTAL )
-		
-		self.m_staticText12 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"With Title", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText12.Wrap( -1 )
-		self.m_staticText12.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 93, 92, False, wx.EmptyString ) )
-		
-		bSizer61.Add( self.m_staticText12, 0, wx.ALL|wx.EXPAND, 5 )
-		
-		self.m_staticText22 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"--", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
-		self.m_staticText22.Wrap( -1 )
-		bSizer61.Add( self.m_staticText22, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
-		
-		
-		sbSizer2.Add( bSizer61, 0, wx.EXPAND, 5 )
-		
-		bSizer611 = wx.BoxSizer( wx.HORIZONTAL )
-		
-		self.m_staticText121 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Visible", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText121.Wrap( -1 )
-		self.m_staticText121.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 93, 92, False, wx.EmptyString ) )
-		
-		bSizer611.Add( self.m_staticText121, 1, wx.ALL, 5 )
-		
-		self.m_staticText221 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"--", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
-		self.m_staticText221.Wrap( -1 )
-		bSizer611.Add( self.m_staticText221, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
-		
-		
-		sbSizer2.Add( bSizer611, 0, wx.EXPAND, 5 )
-		
-		bSizer6111 = wx.BoxSizer( wx.HORIZONTAL )
-		
-		self.m_staticText1211 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Iconized", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText1211.Wrap( -1 )
-		self.m_staticText1211.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 93, 92, False, wx.EmptyString ) )
-		
-		bSizer6111.Add( self.m_staticText1211, 1, wx.ALL, 5 )
-		
-		self.m_staticText2211 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"--", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
-		self.m_staticText2211.Wrap( -1 )
-		bSizer6111.Add( self.m_staticText2211, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
-		
-		
-		sbSizer2.Add( bSizer6111, 0, wx.EXPAND, 5 )
-		
 		bSizer61111 = wx.BoxSizer( wx.HORIZONTAL )
-		
-		self.m_staticText12111 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Enabled", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText12111.Wrap( -1 )
-		self.m_staticText12111.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 70, 93, 92, False, wx.EmptyString ) )
-		
-		bSizer61111.Add( self.m_staticText12111, 1, wx.ALL, 5 )
-		
-		self.m_staticText22111 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"--", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
-		self.m_staticText22111.Wrap( -1 )
-		bSizer61111.Add( self.m_staticText22111, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
 		
 		
 		sbSizer2.Add( bSizer61111, 0, wx.EXPAND, 5 )
+		
+		fgSizer1 = wx.FlexGridSizer( 0, 2, 0, 0 )
+		fgSizer1.SetFlexibleDirection( wx.BOTH )
+		fgSizer1.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		
+		self.m_staticText1 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Total", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText1.Wrap( -1 )
+		self.m_staticText1.SetFont( wx.Font( 8, 75, 90, 92, False, "Lucida Sans Typewriter" ) )
+		
+		fgSizer1.Add( self.m_staticText1, 0, wx.ALL, 5 )
+		
+		self.m_staticTextRetrieved = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextRetrieved.Wrap( -1 )
+		self.m_staticTextRetrieved.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextRetrieved, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_staticText12 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Titled", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText12.Wrap( -1 )
+		self.m_staticText12.SetFont( wx.Font( 8, 75, 90, 92, False, "Lucida Sans" ) )
+		
+		fgSizer1.Add( self.m_staticText12, 0, wx.ALL|wx.EXPAND, 5 )
+		
+		self.m_staticTextTitled = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextTitled.Wrap( -1 )
+		self.m_staticTextTitled.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextTitled, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_staticText121 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Visible", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText121.Wrap( -1 )
+		self.m_staticText121.SetFont( wx.Font( 8, 75, 90, 92, False, "Lucida Sans Typewriter" ) )
+		
+		fgSizer1.Add( self.m_staticText121, 1, wx.ALL, 5 )
+		
+		self.m_staticTextVisible = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextVisible.Wrap( -1 )
+		self.m_staticTextVisible.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextVisible, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_staticText1211 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Iconized", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText1211.Wrap( -1 )
+		self.m_staticText1211.SetFont( wx.Font( wx.NORMAL_FONT.GetPointSize(), 75, 90, 92, False, "Lucida Sans Typewriter" ) )
+		
+		fgSizer1.Add( self.m_staticText1211, 1, wx.ALL, 5 )
+		
+		self.m_staticTextIconized = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextIconized.Wrap( -1 )
+		self.m_staticTextIconized.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextIconized, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_staticText12111 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Enabled", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText12111.Wrap( -1 )
+		self.m_staticText12111.SetFont( wx.Font( 8, 75, 90, 92, False, "Lucida Sans" ) )
+		
+		fgSizer1.Add( self.m_staticText12111, 1, wx.ALL, 5 )
+		
+		self.m_staticTextEnabled = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextEnabled.Wrap( -1 )
+		self.m_staticTextEnabled.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextEnabled, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		
+		self.m_staticText121111 = wx.StaticText( self.m_panel1, wx.ID_ANY, u"Shown", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText121111.Wrap( -1 )
+		self.m_staticText121111.SetFont( wx.Font( 8, 75, 90, 92, False, "Lucida Sans" ) )
+		
+		fgSizer1.Add( self.m_staticText121111, 0, wx.ALL, 5 )
+		
+		self.m_staticTextShown = wx.StaticText( self.m_panel1, wx.ID_ANY, u"----", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_RIGHT )
+		self.m_staticTextShown.Wrap( -1 )
+		self.m_staticTextShown.SetFont( wx.Font( 8, 75, 90, 90, False, wx.EmptyString ) )
+		
+		fgSizer1.Add( self.m_staticTextShown, 0, wx.ALL, 5 )
+		
+		
+		sbSizer2.Add( fgSizer1, 1, wx.EXPAND, 5 )
 		
 		
 		bSizer3.Add( sbSizer2, 0, wx.EXPAND, 5 )
@@ -157,8 +172,8 @@ class WinShow ( wx.Frame ):
 		
 		bSizer3.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
 		
-		self.m_button1 = wx.Button( self.m_panel1, wx.ID_ANY, u"Get Windows", wx.DefaultPosition, wx.DefaultSize, 0 )
-		bSizer3.Add( self.m_button1, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		self.m_buttonGetWindows = wx.Button( self.m_panel1, wx.ID_ANY, u"Get Windows", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer3.Add( self.m_buttonGetWindows, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 		
 		sbSizer1 = wx.StaticBoxSizer( wx.StaticBox( self.m_panel1, wx.ID_ANY, u"Options" ), wx.VERTICAL )
 		
@@ -193,72 +208,87 @@ class WinShow ( wx.Frame ):
 		self.m_statusBar = self.CreateStatusBar( 1, wx.ST_SIZEGRIP, wx.ID_ANY )
 		
 		self.Centre( wx.BOTH )
-		
-		# Connect Events
-		self.m_checkBoxSelfForeground.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxSelfForeground )
-		self.m_checkBoxForeground.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxForeground )
-		self.m_button4.Bind( wx.EVT_BUTTON, self.OnButtonClickShow )
-		self.m_button5.Bind( wx.EVT_BUTTON, self.OnButtonClickRestore )
-		self.m_button6.Bind( wx.EVT_BUTTON, self.OnButtonClickMaximize )
-		self.m_button7.Bind( wx.EVT_BUTTON, self.OnButtonClickMinimize )
-		self.m_button8.Bind( wx.EVT_BUTTON, self.OnButtonClickHide )
-		self.m_button1.Bind( wx.EVT_BUTTON, self.OnButtonClickGetWindows )
-		self.m_checkBoxTitled.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxTitled )
-		self.m_checkBoxVisible.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxVisible )
-		self.m_checkBoxIconized.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxIconized )
-		self.m_checkBoxEnabled.Bind( wx.EVT_CHECKBOX, self.OnCheckBoxEnabled )
 	
 	def __del__( self ):
-		# Disconnect Events
-		self.m_checkBoxSelfForeground.Unbind( wx.EVT_CHECKBOX, None )
-		self.m_checkBoxForeground.Unbind( wx.EVT_CHECKBOX, None )
-		self.m_button4.Unbind( wx.EVT_BUTTON, None )
-		self.m_button5.Unbind( wx.EVT_BUTTON, None )
-		self.m_button6.Unbind( wx.EVT_BUTTON, None )
-		self.m_button7.Unbind( wx.EVT_BUTTON, None )
-		self.m_button8.Unbind( wx.EVT_BUTTON, None )
-		self.m_button1.Unbind( wx.EVT_BUTTON, None )
-		self.m_checkBoxTitled.Unbind( wx.EVT_CHECKBOX, None )
-		self.m_checkBoxVisible.Unbind( wx.EVT_CHECKBOX, None )
-		self.m_checkBoxIconized.Unbind( wx.EVT_CHECKBOX, None )
-		self.m_checkBoxEnabled.Unbind( wx.EVT_CHECKBOX, None )
+		pass
 	
+
+###########################################################################
+## Class AboutDialog
+###########################################################################
+
+class AboutDialog ( wx.Dialog ):
 	
-	# Virtual event handlers, overide them in your derived class
-	def OnCheckBoxSelfForeground( self, event ):
-		event.Skip()
+	def __init__( self, parent ):
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"About", pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
+		
+		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+		
+		bSizer8 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_notebookAbout = wx.Notebook( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_panelAbout = wx.Panel( self.m_notebookAbout, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+		
+		
+		bSizer10.AddSpacer( ( 0, 0), 1, wx.EXPAND|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		self.m_staticTextAppNameVersion = wx.StaticText( self.m_panelAbout, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+		self.m_staticTextAppNameVersion.Wrap( -1 )
+		bSizer10.Add( self.m_staticTextAppNameVersion, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		self.m_staticTextCopyright = wx.StaticText( self.m_panelAbout, wx.ID_ANY, u"MyLabel", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+		self.m_staticTextCopyright.Wrap( -1 )
+		bSizer10.Add( self.m_staticTextCopyright, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		self.m_hyperlinkURL = wx.HyperlinkCtrl( self.m_panelAbout, wx.ID_ANY, u"wxFB Website", u"http://www.wxformbuilder.org", wx.DefaultPosition, wx.DefaultSize, wx.HL_ALIGN_CENTRE|wx.HL_DEFAULT_STYLE )
+		bSizer10.Add( self.m_hyperlinkURL, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		
+		bSizer10.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+		
+		
+		self.m_panelAbout.SetSizer( bSizer10 )
+		self.m_panelAbout.Layout()
+		bSizer10.Fit( self.m_panelAbout )
+		self.m_notebookAbout.AddPage( self.m_panelAbout, u"About", True )
+		
+		bSizer8.Add( self.m_notebookAbout, 1, wx.EXPAND |wx.ALL, 5 )
+		
+		self.m_buttonClose = wx.Button( self, wx.ID_ANY, u"Close", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer8.Add( self.m_buttonClose, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		
+		self.SetSizer( bSizer8 )
+		self.Layout()
+		bSizer8.Fit( self )
+		
+		self.Centre( wx.BOTH )
 	
-	def OnCheckBoxForeground( self, event ):
-		event.Skip()
+	def __del__( self ):
+		pass
 	
-	def OnButtonClickShow( self, event ):
-		event.Skip()
+
+###########################################################################
+## Class PanelAboutDocument
+###########################################################################
+
+class PanelAboutDocument ( wx.Panel ):
 	
-	def OnButtonClickRestore( self, event ):
-		event.Skip()
+	def __init__( self, parent ):
+		wx.Panel.__init__ ( self, parent, id = wx.ID_ANY, pos = wx.DefaultPosition, size = wx.Size( -1,-1 ), style = wx.TAB_TRAVERSAL )
+		
+		bSizer111 = wx.BoxSizer( wx.VERTICAL )
+		
+		self.m_textCtrlDocument = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( -1,-1 ), wx.TE_AUTO_URL|wx.TE_MULTILINE|wx.TE_READONLY )
+		bSizer111.Add( self.m_textCtrlDocument, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+		
+		
+		self.SetSizer( bSizer111 )
+		self.Layout()
+		bSizer111.Fit( self )
 	
-	def OnButtonClickMaximize( self, event ):
-		event.Skip()
-	
-	def OnButtonClickMinimize( self, event ):
-		event.Skip()
-	
-	def OnButtonClickHide( self, event ):
-		event.Skip()
-	
-	def OnButtonClickGetWindows( self, event ):
-		event.Skip()
-	
-	def OnCheckBoxTitled( self, event ):
-		event.Skip()
-	
-	def OnCheckBoxVisible( self, event ):
-		event.Skip()
-	
-	def OnCheckBoxIconized( self, event ):
-		event.Skip()
-	
-	def OnCheckBoxEnabled( self, event ):
-		event.Skip()
+	def __del__( self ):
+		pass
 	
 
